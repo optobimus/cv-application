@@ -17,7 +17,7 @@ class Content extends Component {
 
 
       return (
-        <div>
+        <div className="content">
             <h3>Description</h3>
             <p>{personal.description}</p>
             <h3>Experience</h3>

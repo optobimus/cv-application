@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "../../styles/form.css"
+
 import Personal from "./Personal";
 import Practical from "./Practical";
 import Educational from "./Educational";
@@ -9,7 +11,7 @@ class Form extends Component {
     const { cv } = this.props;
 
     return (
-      <div>
+      <div className="inputForm">
         <Personal personalInfo={cv.personal}/>
         <Practical experienceInfo={cv.experience}/>
         <Educational educationalInfo={cv.education}/>

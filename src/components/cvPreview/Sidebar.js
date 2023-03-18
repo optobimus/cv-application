@@ -4,8 +4,8 @@ class Sidebar extends Component {
     render() {
       const { photo, address, phoneNumber, email } = this.props;
       return (
-        <div>
-          <img src={photo} alt="avatar"/>
+        <div className="sidebar">
+          <img className="avatar" src={photo} alt="avatar"/>
           <h3>Personal Details</h3>
           <h4>Address</h4>
           <p>{address}</p>

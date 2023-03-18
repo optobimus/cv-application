@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "../styles/main.css"
+
 import uniqid from "uniqid";
 import emptyAvatar from "../static/profile.webp";
 import CVPreview from "./cvPreview/CVPreview";
@@ -48,7 +50,7 @@ class Main extends Component {
     render() {
       const { emptyCV } = this.state;
       return (
-        <div>
+        <div className="main">
           <Form cv={emptyCV}/>
           <CVPreview cv={emptyCV}/>
         </div>  

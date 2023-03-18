@@ -4,7 +4,7 @@ class Header extends Component {
     render() {
       const { firstName, lastName, title } = this.props;
       return (
-        <div>
+        <div className="preview-header">
           <h1>
             {firstName} {lastName}
           </h1>
