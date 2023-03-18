@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import uniqid from "uniqid";
 import emptyAvatar from "../static/profile.webp";
-import Form from "./form";
+import CVPreview from "./cvPreview/CVPreview";
+import Form from "./form/Form";
 
 class Main extends Component {
   constructor() {
@@ -10,7 +11,7 @@ class Main extends Component {
 
     this.state = {
       emptyCV: {
-        personalInfo: {
+        personal: {
           firstName: "",
           lastName: "",
           title: "",
@@ -49,6 +50,7 @@ class Main extends Component {
       return (
         <div>
           <Form cv={emptyCV}/>
+          <CVPreview cv={emptyCV}/>
         </div>  
       );
     }
