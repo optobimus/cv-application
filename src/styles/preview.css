@@ -1,0 +1,37 @@
+.avatar {
+    width: 100%;
+    height: auto;
+}
+
+.cv-preview {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.175);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 80px);
+    width: 650px;
+}
+
+.main-preview {
+    display: flex;
+    flex: 1;
+}
+
+.preview-header, .content, .sidebar {
+    padding: 20px;
+}
+
+.preview-header {
+    background-color: #457B9D;
+    height: 50px;
+}
+
+.content {
+    flex: 1;
+
+}
+
+.sidebar {
+    background-color: #EEEEEE;
+    width: 150px;
+}

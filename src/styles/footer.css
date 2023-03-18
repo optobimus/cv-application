@@ -1,0 +1,32 @@
+a img {
+    filter: drop-shadow(0 0 0 white) invert(100%);
+}
+
+a img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a:hover img {
+    animation: spin 0.5s linear;
+    animation-fill-mode: forwards;
+    transform: scale(1.2);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg) scale(1.2); }
+}
+
+
+footer {
+    height: 40px;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
