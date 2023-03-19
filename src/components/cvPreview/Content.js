@@ -7,13 +7,13 @@ class Content extends Component {
     render() {
         const { personal, experience, education } = this.props;
 
-        const experienceItems = experience.map((experienceItem) => {
+        const experienceItems = experience.map((experienceItem) => (
           <ExperienceItem experienceItem={experienceItem} key={experienceItem.id}/>
-        });
+        ));
 
-        const educationItems = education.map((educationItem) => {
+        const educationItems = education.map((educationItem) => (
           <EducationItem educationItem={educationItem} key={educationItem.id}/>
-        });
+        ));
 
 
       return (

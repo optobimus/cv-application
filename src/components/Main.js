@@ -16,6 +16,7 @@ class Main extends Component {
     }
 
     this.handleChangePersonal = this.handleChangePersonal.bind(this);
+    this.handleChangeExperience = this.handleChangeExperience.bind(this);
     this.handleLoadExample = this.handleLoadExample.bind(this);
   }
 
@@ -58,6 +59,20 @@ class Main extends Component {
     reader.readAsDataURL(file);
   }
 
+  handleChangeExperience(e, id) {
+    const { name, value } = e.target;
+    this.setState((prevState) => {
+      const newExperience = prevState.cv.experience.map((experienceItem) => {
+        if (experienceItem.id === id) {
+          return { ...experienceItem, [name]: value };
+        }
+        return experienceItem;
+      });
+      return { cv: { ...prevState.cv, experience: [...newExperience] } };
+    });
+  }
+
+
   handleLoadExample = () => {
     // this.setState({
     //   cv: exampleCV
@@ -72,6 +87,7 @@ class Main extends Component {
         <Form 
           cv={cv}
           onChangePersonal={this.handleChangePersonal}
+          onChangeExperience={this.handleChangeExperience}
           onLoadExample={this.handleLoadExample}
         
         />
