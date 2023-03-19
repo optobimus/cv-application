@@ -18,11 +18,21 @@ class Form extends Component {
         id={experienceItem.id}
       />
     ));
+
+    const educationItems = cv.education.map((educationItem) => (
+      <Educational 
+        key={educationItem.id}
+        educationalInfo={educationItem}
+        onChange={onChangeEducation}
+        id={educationItem.id}
+      />
+    ));
+
     return (
       <div className="inputForm">
         <Personal personalInfo={cv.personal} onChange={onChangePersonal}/>
         {experienceItems}
-        <Educational educationalInfo={cv.education}/>
+        {educationItems}
         <button type="button" className="exampleBtn" onClick={onLoadExample}>Load Example</button>
         <button type="button" className="resetBtn" onClick={onReset}>Reset</button>
       </div>  

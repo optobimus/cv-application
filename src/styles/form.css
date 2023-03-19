@@ -21,3 +21,17 @@ input[type="text"], input[type="tel"], input[type="file"] {
 input[ŧype="file"] {
     height: 42px;
 }
+
+.education-header, .experience-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.education-header button, .experience-header button {
+    border: 0;
+    padding: 6px;
+    background-color: #1D3557;
+    color: white;
+    border-radius: 8px;
+}

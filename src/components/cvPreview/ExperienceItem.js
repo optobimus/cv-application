@@ -5,12 +5,12 @@ class ExperienceItem extends Component {
         const { experienceItem } = this.props;
 
       return (
-        <div>
+        <div className="experience-preview">
             <div className="experienceDate">
-                <h3>{experienceItem.startDate} - {experienceItem.endDate}</h3>
+                <h4>{experienceItem.startDate} - {experienceItem.endDate}</h4>
             </div>
             <div className="experienceDesc">
-                <h3>{experienceItem.position}</h3>
+                <h4>{experienceItem.position}</h4>
                 <p>{experienceItem.company}, {experienceItem.city}</p>
             </div>
         </div>  

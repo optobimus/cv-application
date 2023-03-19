@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     height: calc(100% - 40px);
+    width: calc(var(--height) * 0.70707070);
 }
 
 .main-preview {
@@ -40,4 +41,14 @@
 .sidebar {
     background-color: #EEEEEE;
     width: 150px;
+}
+
+.experience-preview {
+    display: flex;
+    gap: 30px;
+}
+
+.education-preview {
+    display: flex;
+    gap: 30px;
 }

@@ -17,6 +17,7 @@ class Main extends Component {
 
     this.handleChangePersonal = this.handleChangePersonal.bind(this);
     this.handleChangeExperience = this.handleChangeExperience.bind(this);
+    this.handleChangeEducation = this.handleChangeEducation.bind(this);
     this.handleLoadExample = this.handleLoadExample.bind(this);
   }
 
@@ -72,12 +73,23 @@ class Main extends Component {
     });
   }
 
+  handleChangeEducation(e, id) {
+    const { name, value } = e.target;
+    this.setState((prevState) => {
+      const newEducation = prevState.cv.education.map((educationItem) => {
+        if (educationItem.id === id) {
+          return { ...educationItem, [name]: value };
+        }
+        return educationItem;
+      });
+      return { cv: { ...prevState.cv, education: [...newEducation] } };
+    });
+  }
 
-  handleLoadExample = () => {
-    // this.setState({
-    //   cv: exampleCV
-    // })
-    console.log(exampleCV);
+  handleLoadExample() {
+    this.setState(() => ({
+      cv: exampleCV
+    }));
   }
 
   render() {
@@ -88,6 +100,7 @@ class Main extends Component {
           cv={cv}
           onChangePersonal={this.handleChangePersonal}
           onChangeExperience={this.handleChangeExperience}
+          onChangeEducation={this.handleChangeEducation}
           onLoadExample={this.handleLoadExample}
         
         />

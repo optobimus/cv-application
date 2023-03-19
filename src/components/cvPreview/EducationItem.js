@@ -5,14 +5,14 @@ class EducationItem extends Component {
         const { educationItem } = this.props;
 
       return (
-        <div>
+        <div className="education-preview">
             <div className="educationDate">
-                <h3>{educationItem.startDate} - {educationItem.endDate}</h3>
+                <h4>{educationItem.startDate} - {educationItem.endDate}</h4>
             </div>
             <div className="experienceDesc">
-                <h3>{educationItem.position}, {educationItem.city}</h3>
-                <p>{educationItem.degree}</p>
-                <p>{educationItem.subject}</p>
+                <h4>{educationItem.university}, {educationItem.city}</h4>
+                <p>Degree: {educationItem.degree}</p>
+                <p>Subject: {educationItem.subject}</p>
             </div>
         </div>  
       );

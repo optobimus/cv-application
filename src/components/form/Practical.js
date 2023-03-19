@@ -17,7 +17,11 @@ class Practical extends Component {
 
     return (
       <div className="experience">
-        <h3>Experience</h3>
+        <div className="experience-header">
+          <h3>Experience</h3>
+          <button>Add</button>
+          <button>Delete</button>
+        </div>
         <form>
           <input
             type="text"
