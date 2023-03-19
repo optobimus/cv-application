@@ -6,20 +6,10 @@ class Personal extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.handleFileChange = this.handleFileChange.bind(this);
   }
 
   handleChange(e) {
     this.props.onChange(e);
-  }
-
-  handleFileChange(e) {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const personalInfo = { ...this.props.personalInfo, photo: event.target.result };
-      this.props.onChange({ target: { name: "personalInfo", value: personalInfo } });
-    };
-    reader.readAsDataURL(e.target.files[0]);
   }
 
   render() {
@@ -54,7 +44,7 @@ class Personal extends Component {
               type="file"
               name="photo"
               placeholder="Personal Photo"
-              onChange={this.handleFileChange}
+              onChange={this.handleChange}
             />
             <input
               type="text"

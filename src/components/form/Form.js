@@ -8,13 +8,15 @@ import Educational from "./Educational";
 
 class Form extends Component {
   render() {
-    const { cv } = this.props;
+    const { cv, onChangePersonal, onChangeExperience, onChangeEducation, onLoadExample, onReset } = this.props;
 
     return (
       <div className="inputForm">
-        <Personal personalInfo={cv.personal}/>
+        <Personal personalInfo={cv.personal} onChange={onChangePersonal}/>
         <Practical experienceInfo={cv.experience}/>
         <Educational educationalInfo={cv.education}/>
+        <button type="button" className="exampleBtn" onClick={onLoadExample}>Load Example</button>
+        <button type="button" className="resetBtn" onClick={onReset}>Reset</button>
       </div>  
     );
   }

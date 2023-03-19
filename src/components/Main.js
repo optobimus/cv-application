@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import "../styles/main.css"
 
-import uniqid from "uniqid";
-import emptyAvatar from "../static/profile.webp";
 import CVPreview from "./cvPreview/CVPreview";
+import exampleCV from "./utils/exampleCV";
+import emptyCV from "./utils/emptyCV";
 import Form from "./form/Form";
 
 class Main extends Component {
@@ -12,50 +12,73 @@ class Main extends Component {
     super();
 
     this.state = {
-      emptyCV: {
-        personal: {
-          firstName: "",
-          lastName: "",
-          title: "",
-          photo: emptyAvatar,
-          address: "",
-          phoneNumber: "",
-          email: "",
-          description: "",
-        },
-        experience: [
-          {
-            id: uniqid(),
-            position: "",
-            company: "",
-            city: "",
-            startDate: "",
-            endDate: "",
-          },
-        ],
-        education: [
-          {
-            id: uniqid(),
-            university: "",
-            city: "",
-            degree: "",
-            subject: "",
-            startDate: "",
-            endDate: "",
-          },
-        ],
-      }
+      cv: emptyCV
     }
+
+    this.handleChangePersonal = this.handleChangePersonal.bind(this);
+    this.handleLoadExample = this.handleLoadExample.bind(this);
   }
-    render() {
-      const { emptyCV } = this.state;
-      return (
-        <div className="main">
-          <Form cv={emptyCV}/>
-          <CVPreview cv={emptyCV}/>
-        </div>  
-      );
+
+  handleChangePersonal(e) {
+    const { name, value, type } = e.target;
+    
+    if (type === 'file') {
+      this.handleChangeFile(e);
+      return;
     }
+
+    this.setState((prevState) => ({
+      cv: {
+        ...prevState.cv,
+        personal: {
+          ...prevState.cv.personal,
+          [name]: value,
+        },
+      },
+    }));
+  }
+
+  handleChangeFile(e) {
+    const { name } = e.target;
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.setState((prevState) => ({
+        cv: {
+          ...prevState.cv,
+          personal: {
+            ...prevState.cv.personal,
+            [name]: reader.result,
+          },
+        },
+      }));
+    };
+    reader.readAsDataURL(file);
+  }
+
+  handleLoadExample = () => {
+    // this.setState({
+    //   cv: exampleCV
+    // })
+    console.log(exampleCV);
+  }
+
+  render() {
+    const { cv } = this.state;
+    return (
+      <div className="main">
+        <Form 
+          cv={cv}
+          onChangePersonal={this.handleChangePersonal}
+          onLoadExample={this.handleLoadExample}
+        
+        />
+        <CVPreview cv={cv}/>
+      </div>  
+    );
+  }
 }
   
   
