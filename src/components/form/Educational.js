@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+
 class Educational extends Component {
   constructor(props) {
     super(props);
@@ -12,16 +13,10 @@ class Educational extends Component {
   }
   
   render() {
-    const { educationalInfo } = this.props;
+    const { educationalInfo, id } = this.props;
 
     return (
       <div className="education">
-        <div className="education-header">
-          <h3>Education</h3>
-          <button>Add</button>
-          <button>Delete</button>
-        </div>
-        
         <form>
           <input
             type="text"

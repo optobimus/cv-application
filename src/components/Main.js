@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import uniqid from "uniqid"
 
 import "../styles/main.css"
 
@@ -18,7 +19,10 @@ class Main extends Component {
     this.handleChangePersonal = this.handleChangePersonal.bind(this);
     this.handleChangeExperience = this.handleChangeExperience.bind(this);
     this.handleChangeEducation = this.handleChangeEducation.bind(this);
+    this.handleAddExperience = this.handleAddExperience.bind(this);
     this.handleLoadExample = this.handleLoadExample.bind(this);
+    this.handlePDF = this.handlePDF.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleChangePersonal(e) {
@@ -86,10 +90,39 @@ class Main extends Component {
     });
   }
 
+  handleAddExperience() {
+    this.setState((prevState) => ({
+      cv: {
+        ...prevState.cv,
+        experience: [
+          ...prevState.cv.experience,
+          {
+            id: uniqid(),
+            position: '',
+            company: '',
+            city: '',
+            from: '',
+            to: '',
+          },
+        ],
+      },
+    }));
+  }
+
   handleLoadExample() {
     this.setState(() => ({
       cv: exampleCV
     }));
+  }
+
+  handleReset() {
+    this.setState(() => ({
+      cv: emptyCV,
+    }));
+  }
+
+  handlePDF() {
+
   }
 
   render() {
@@ -101,7 +134,10 @@ class Main extends Component {
           onChangePersonal={this.handleChangePersonal}
           onChangeExperience={this.handleChangeExperience}
           onChangeEducation={this.handleChangeEducation}
+          onAddExperience={this.handleAddExperience}
           onLoadExample={this.handleLoadExample}
+          onPDF={this.handlePDF}
+          onReset={this.handleReset}
         
         />
         <CVPreview cv={cv}/>

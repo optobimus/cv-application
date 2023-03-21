@@ -3,6 +3,7 @@
     border-radius: 10px;
     padding: 0 20px 20px 20px;
     height: calc(100% - 60px);
+    width: 600px;
 }
 
 
@@ -26,7 +27,16 @@ input[ŧype="file"] {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
 }
+
+.education-header-left, .experience-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
 
 .education-header button, .experience-header button {
     border: 0;
@@ -34,4 +44,60 @@ input[ŧype="file"] {
     background-color: #1D3557;
     color: white;
     border-radius: 8px;
+}
+
+.example-button {
+    color: white;
+    background-color: #C25C0E;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.reset-button {
+    color: white;
+    background-color: #B3211E;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.buttons-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.pdf-button {
+    color: white;
+    background-color: #1BA148;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.page-navigation {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.page-navigation button {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    background-color: #F7F7F7;
+    border: 1px solid black;
 }
