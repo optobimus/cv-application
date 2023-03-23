@@ -91,22 +91,24 @@ class Main extends Component {
   }
 
   handleAddExperience() {
-    this.setState((prevState) => ({
-      cv: {
-        ...prevState.cv,
-        experience: [
-          ...prevState.cv.experience,
-          {
-            id: uniqid(),
-            position: '',
-            company: '',
-            city: '',
-            from: '',
-            to: '',
-          },
-        ],
-      },
-    }));
+    if (this.state.cv.experience.length < 5) {
+      this.setState((prevState) => ({
+        cv: {
+          ...prevState.cv,
+          experience: [
+            ...prevState.cv.experience,
+            {
+              id: uniqid(),
+              position: '',
+              company: '',
+              city: '',
+              startDate: '',
+              endDate: '',
+            },
+          ],
+        },
+      }));
+    }
   }
 
   handleLoadExample() {
