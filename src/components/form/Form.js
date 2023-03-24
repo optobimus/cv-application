@@ -9,15 +9,25 @@ import Formtitle from "./Formtitle";
 import Multiple from "./Multiple";
 
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeID: null,
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    const activeID = e.target.dataset.id;
+    this.setState({ activeID });
+  }
 
   render() {
     const { cv, onChangePersonal, onChangeExperience, onChangeEducation, onAddExperience, onLoadExample, onReset, onPDF } = this.props;
+    const { activeID } = this.state;
 
     const experienceItems = cv.experience.map((experienceItem) => {
-      const activeItem = document.querySelector(".experience-header .active");
-        if (activeItem?.dataset.id === experienceItem.id) {
-
-          console.log(activeItem.dataset.id);
+        if (activeID === experienceItem.id) {
             return <Practical 
               key={experienceItem.id}
               experienceInfo={experienceItem}
@@ -49,12 +59,12 @@ class Form extends Component {
         <Personal personalInfo={cv.personal} onChange={onChangePersonal}/>
         <div className="experience-header">
           <Formtitle title="Experience" className="experience-header-left" onAddExperience={onAddExperience}/>
-          <Multiple data={cv.experience}/>
+          <Multiple data={cv.experience} onClick={this.handleClick} activeID={activeID}/>
         </div>
         {experienceItems}
         <div className="education-header">
           <Formtitle title="Education" className="education-header-left"/>
-          <Multiple data={cv.education}/>
+          <Multiple data={cv.education} onClick={this.handleClick} activeID={activeID}/>
         </div>
         {educationItems}
         <div className="buttons-container">

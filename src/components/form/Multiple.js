@@ -11,8 +11,7 @@ class Multiple extends Component {
     }
 
     handleClick(e) {
-      const activeID = e.target.dataset.id;
-      this.setState({ activeID });
+      this.props.onClick(e);
     }
 
     componentDidMount() {
@@ -24,8 +23,7 @@ class Multiple extends Component {
 
 
     render() {
-      const { data } = this.props;
-      const { activeID } = this.state;
+      const { data, activeID } = this.props;
       let i = 1;
      
       const items = data.map((item) => {
