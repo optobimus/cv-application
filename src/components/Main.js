@@ -20,6 +20,7 @@ class Main extends Component {
     this.handleChangeExperience = this.handleChangeExperience.bind(this);
     this.handleChangeEducation = this.handleChangeEducation.bind(this);
     this.handleAddExperience = this.handleAddExperience.bind(this);
+    this.handleAddEducation = this.handleAddEducation.bind(this);
     this.handleLoadExample = this.handleLoadExample.bind(this);
     this.handlePDF = this.handlePDF.bind(this);
     this.handleReset = this.handleReset.bind(this);
@@ -111,6 +112,29 @@ class Main extends Component {
     }
   }
 
+  handleAddEducation() {
+    console.log(this.state.cv);
+    if (this.state.cv.education.length < 5) {
+      this.setState((prevState) => ({
+        cv: {
+          ...prevState.cv,
+          education: [
+            ...prevState.cv.education,
+            {
+              id: uniqid(),
+              university: '',
+              city: '',
+              degree: '',
+              subject: '',
+              startDate: '',
+              endDate: '',
+            },
+          ],
+        },
+      }));
+    }
+  }
+
   handleLoadExample() {
     this.setState(() => ({
       cv: exampleCV
@@ -137,6 +161,7 @@ class Main extends Component {
           onChangeExperience={this.handleChangeExperience}
           onChangeEducation={this.handleChangeEducation}
           onAddExperience={this.handleAddExperience}
+          onAddEducation={this.handleAddEducation}
           onLoadExample={this.handleLoadExample}
           onPDF={this.handlePDF}
           onReset={this.handleReset}

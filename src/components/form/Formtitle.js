@@ -9,7 +9,7 @@ class Formtitle extends Component {
     handleClick(e) {
     console.log("YA");
     const { id } = this.props;
-    this.props.onAddExperience(e, id);
+    this.props.onClick(e, id);
     }
     render() {
         const { className, title } = this.props;

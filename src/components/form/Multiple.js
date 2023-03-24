@@ -4,9 +4,6 @@ class Multiple extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {
-        activeID: null,
-      }
       this.handleClick = this.handleClick.bind(this);
     }
 

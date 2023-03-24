@@ -12,22 +12,29 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeID: null,
+      activeExp: null,
+      activeEdu: null,
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleActiveExperience = this.handleActiveExperience.bind(this);
+    this.handleActiveEducation = this.handleActiveEducation.bind(this);
   }
 
-  handleClick(e) {
-    const activeID = e.target.dataset.id;
-    this.setState({ activeID });
+  handleActiveExperience(e) {
+    const activeExp = e.target.dataset.id;
+    this.setState({ activeExp });
+  }
+
+  handleActiveEducation(e) {
+    const activeEdu = e.target.dataset.id;
+    this.setState({ activeEdu });
   }
 
   render() {
-    const { cv, onChangePersonal, onChangeExperience, onChangeEducation, onAddExperience, onLoadExample, onReset, onPDF } = this.props;
-    const { activeID } = this.state;
+    const { cv, onChangePersonal, onChangeExperience, onChangeEducation, onAddExperience, onAddEducation, onLoadExample, onReset, onPDF } = this.props;
+    const { activeExp, activeEdu } = this.state;
 
     const experienceItems = cv.experience.map((experienceItem) => {
-        if (activeID === experienceItem.id) {
+        if (activeExp === experienceItem.id) {
             return <Practical 
               key={experienceItem.id}
               experienceInfo={experienceItem}
@@ -40,8 +47,7 @@ class Form extends Component {
     });
 
     const educationItems = cv.education.map((educationItem) => {
-      const activeItem = document.querySelector(".active");
-      if (activeItem !== null && activeItem.dataset.id === educationItem.id) {
+      if (activeEdu === educationItem.id) {
         return <Educational 
           key={educationItem.id}
           educationalInfo={educationItem}
@@ -58,13 +64,13 @@ class Form extends Component {
       <div className="inputForm">
         <Personal personalInfo={cv.personal} onChange={onChangePersonal}/>
         <div className="experience-header">
-          <Formtitle title="Experience" className="experience-header-left" onAddExperience={onAddExperience}/>
-          <Multiple data={cv.experience} onClick={this.handleClick} activeID={activeID}/>
+          <Formtitle title="Experience" className="experience-header-left" onClick={onAddExperience}/>
+          <Multiple data={cv.experience} onClick={this.handleActiveExperience} activeID={activeExp}/>
         </div>
         {experienceItems}
         <div className="education-header">
-          <Formtitle title="Education" className="education-header-left"/>
-          <Multiple data={cv.education} onClick={this.handleClick} activeID={activeID}/>
+          <Formtitle title="Education" className="education-header-left" onClick={onAddEducation}/>
+          <Multiple data={cv.education} onClick={this.handleActiveEducation} activeID={activeEdu}/>
         </div>
         {educationItems}
         <div className="buttons-container">
