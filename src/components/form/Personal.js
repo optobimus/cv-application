@@ -40,12 +40,15 @@ class Personal extends Component {
               value={personalInfo.title}
               onChange={this.handleChange}
             />
-            <input
-              type="file"
-              name="photo"
-              placeholder="Personal Photo"
-              onChange={this.handleChange}
-            />
+            <label className="custom-file-upload">
+              <input
+                type="file"
+                name="photo"
+                placeholder="Personal Photo"
+                onChange={this.handleChange}
+              />
+            </label>
+              
             <input
               type="text"
               name="address"

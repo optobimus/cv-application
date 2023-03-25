@@ -87,8 +87,6 @@ class Form extends Component {
     }
   }
 
-  
-
   render() {
     const { 
       cv, 
@@ -129,7 +127,6 @@ class Form extends Component {
       return null;
 
     });
-
 
     return (
       <div className="inputForm">

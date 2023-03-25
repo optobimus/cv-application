@@ -100,3 +100,31 @@ input[ŧype="file"] {
     background-color: #F7F7F7;
     border: 1px solid black;
 }
+
+input[type="file"] {
+    display: none;
+  }
+
+.custom-file-upload {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f7f7f7;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 10%);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-file-upload::before {
+    content: 'Picture';
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+    
+    
+    

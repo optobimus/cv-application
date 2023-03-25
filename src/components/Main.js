@@ -7,6 +7,8 @@ import CVPreview from "./cvPreview/CVPreview";
 import exampleCV from "./utils/exampleCV";
 import emptyCV from "./utils/emptyCV";
 import Form from "./form/Form";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 class Main extends Component {
   constructor() {
@@ -167,8 +169,39 @@ class Main extends Component {
   }
 
   handlePDF() {
-
+    const cvPreview = document.querySelector('.cv-preview');
+    if (!cvPreview) return;
+  
+    const options = {
+      scale: 3, // increase the scale to increase the resolution
+      useCORS: true, // use cross-origin resource sharing to load images
+      allowTaint: true, // allow images to be loaded from other domains
+      backgroundColor: null, // remove the background color
+      windowWidth: cvPreview.offsetWidth, // set the canvas width to match the element width
+      windowHeight: cvPreview.offsetHeight, // set the canvas height to match the element height
+      logging: true, // enable logging for debugging
+      removeContainer: true, // remove the canvas element after rendering
+      onclone: (doc) => { // remove the rounded corners in the cloned element
+        const element = doc.querySelector('.cv-preview');
+        element.style.borderRadius = '0';
+      },
+    };
+  
+    // Use html2canvas to convert the .cv-preview div to a canvas
+    html2canvas(cvPreview, options).then(canvas => {
+      // Use jsPDF to generate a PDF from the canvas
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      });
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
+      pdf.save('cv.pdf');
+    });
   }
+  
+  
+  
 
   render() {
     const { cv } = this.state;
