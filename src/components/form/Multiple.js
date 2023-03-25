@@ -8,14 +8,13 @@ class Multiple extends Component {
     }
 
     handleClick(e) {
-      this.props.onClick(e);
+      this.props.onClick(e.target);
     }
 
     componentDidMount() {
       const activeButton = document.querySelector(".nav-button.active");
       const activeID = activeButton?.dataset.id;
       this.setState({ activeID });
-
     }
 
 

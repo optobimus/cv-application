@@ -20,18 +20,39 @@ class Form extends Component {
   }
 
   handleActiveExperience(e) {
-    const activeExp = e.target.dataset.id;
+    const activeExp = e.dataset.id;
     this.setState({ activeExp });
   }
 
   handleActiveEducation(e) {
-    const activeEdu = e.target.dataset.id;
+    const activeEdu = e.dataset.id;
     this.setState({ activeEdu });
   }
+
+  componentDidMount() {
+    const experienceBtns = document.querySelectorAll(".experience-header .nav-button");
+    if (experienceBtns.length === 1) {
+      this.setState({ activeExp: experienceBtns[0].dataset.id })
+    }
+    const educationBtns = document.querySelectorAll(".education-header .nav-button");
+    if (educationBtns.length === 1) {
+      this.setState({ activeEdu: educationBtns[0].dataset.id})
+    }
+
+  }
+
+  
 
   render() {
     const { cv, onChangePersonal, onChangeExperience, onChangeEducation, onAddExperience, onAddEducation, onLoadExample, onReset, onPDF } = this.props;
     const { activeExp, activeEdu } = this.state;
+
+
+
+
+
+
+
 
     const experienceItems = cv.experience.map((experienceItem) => {
         if (activeExp === experienceItem.id) {

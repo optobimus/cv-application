@@ -113,7 +113,6 @@ class Main extends Component {
   }
 
   handleAddEducation() {
-    console.log(this.state.cv);
     if (this.state.cv.education.length < 5) {
       this.setState((prevState) => ({
         cv: {
