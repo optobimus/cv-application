@@ -53,12 +53,20 @@
 
 .experience-preview {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     line-height: 0.6;
 }
 
 .education-preview {
     display: flex;
-    gap: 30px;
+    gap: 20px;
     line-height: 0.6;
+}
+
+.experienceDate {
+    width: 25%;
+}
+
+.educationDate {
+    width: 25%;
 }
