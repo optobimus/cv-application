@@ -21,6 +21,8 @@ class Main extends Component {
     this.handleChangeEducation = this.handleChangeEducation.bind(this);
     this.handleAddExperience = this.handleAddExperience.bind(this);
     this.handleAddEducation = this.handleAddEducation.bind(this);
+    this.handleDeleteExperience = this.handleDeleteExperience.bind(this);
+    this.handleDeleteEducation = this.handleDeleteEducation.bind(this);
     this.handleLoadExample = this.handleLoadExample.bind(this);
     this.handlePDF = this.handlePDF.bind(this);
     this.handleReset = this.handleReset.bind(this);
@@ -134,6 +136,24 @@ class Main extends Component {
     }
   }
 
+  handleDeleteExperience(id) {
+    this.setState((prevState) => {
+      const newExperience = prevState.cv.experience.filter((experienceItem) => {
+        return experienceItem.id !== id;
+      });
+      return { cv: { ...prevState.cv, experience: newExperience } };
+    });
+  }
+
+  handleDeleteEducation(id) {
+    this.setState((prevState) => {
+      const newEducation = prevState.cv.education.filter((educationItem) => {
+        return educationItem.id !== id;
+      });
+      return { cv: { ...prevState.cv, education: newEducation } };
+    });
+  }
+
   handleLoadExample() {
     this.setState(() => ({
       cv: exampleCV
@@ -161,6 +181,8 @@ class Main extends Component {
           onChangeEducation={this.handleChangeEducation}
           onAddExperience={this.handleAddExperience}
           onAddEducation={this.handleAddEducation}
+          onDeleteExperience={this.handleDeleteExperience}
+          onDeleteEducation={this.handleDeleteEducation}
           onLoadExample={this.handleLoadExample}
           onPDF={this.handlePDF}
           onReset={this.handleReset}

@@ -3,21 +3,26 @@ import React, { Component } from "react";
 class Formtitle extends Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleAddButton = this.handleAddButton.bind(this);
+        this.handleDeleteButton = this.handleDeleteButton.bind(this);
     }
     
-    handleClick(e) {
-    console.log("YA");
-    const { id } = this.props;
-    this.props.onClick(e, id);
+    handleAddButton(e) {
+      this.props.onClickAdd();
     }
+
+    handleDeleteButton(e) {
+      const { id } = this.props;
+      this.props.onClickDelete(id);
+    }
+
     render() {
         const { className, title } = this.props;
       return (
         <div className={className}>
           <h3>{title}</h3>
-          <button onClick={this.handleClick}>Add</button>
-          <button>Delete</button>
+          <button onClick={this.handleAddButton}>Add</button>
+          <button onClick={this.handleDeleteButton}>Delete</button>
         </div>
       );
     }

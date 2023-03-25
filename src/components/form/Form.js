@@ -17,6 +17,9 @@ class Form extends Component {
     }
     this.handleActiveExperience = this.handleActiveExperience.bind(this);
     this.handleActiveEducation = this.handleActiveEducation.bind(this);
+
+    this.handleDeleteExperienceClass = this.handleDeleteExperienceClass.bind(this);
+    this.handleDeleteEducationClass = this.handleDeleteEducationClass.bind(this);
   }
 
   handleActiveExperience(e) {
@@ -29,29 +32,76 @@ class Form extends Component {
     this.setState({ activeEdu });
   }
 
-  componentDidMount() {
-    const experienceBtns = document.querySelectorAll(".experience-header .nav-button");
-    if (experienceBtns.length === 1) {
-      this.setState({ activeExp: experienceBtns[0].dataset.id })
+  handleDeleteExperienceClass(id) {
+    let position = 0;
+    const experienceBtns = Array.from(document.querySelectorAll(".experience-header .nav-button"));
+    experienceBtns.forEach((item) => {
+      if (item.dataset.id === id) {
+        position = experienceBtns.indexOf(item);
+      }
+    })
+    if (position === 0) {
+      this.setState({ activeExp: experienceBtns[1].dataset.id })
+    } else {
+      this.setState({ activeExp: experienceBtns[position - 1].dataset.id})
     }
+    this.props.onDeleteExperience(id);
+  }
+
+  handleDeleteEducationClass(id) {
+    let position = 0;
+    const educationBtns = Array.from(document.querySelectorAll(".education-header .nav-button"));
+    educationBtns.forEach((item) => {
+      if (item.dataset.id === id) {
+        position = educationBtns.indexOf(item);
+      }
+    })
+    if (position === 0) {
+      this.setState({ activeEdu: educationBtns[1].dataset.id })
+    } else {
+      this.setState({ activeEdu: educationBtns[position - 1].dataset.id})
+    }
+    this.props.onDeleteEducation(id);
+  }
+
+  componentDidMount() {
+    this.setActiveItems();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.activeExp !== this.state.activeExp || prevState.activeEdu !== this.state.activeEdu) {
+      this.setActiveItems();
+    }
+  }
+
+  setActiveItems() {
+    const experienceBtns = document.querySelectorAll(".experience-header .nav-button");
     const educationBtns = document.querySelectorAll(".education-header .nav-button");
-    if (educationBtns.length === 1) {
-      this.setState({ activeEdu: educationBtns[0].dataset.id})
+
+    if (experienceBtns.length === 1) {
+      this.setState({ activeExp: experienceBtns[0].dataset.id });
     }
 
+    if (educationBtns.length === 1) {
+      this.setState({ activeEdu: educationBtns[0].dataset.id });
+    }
   }
 
   
 
   render() {
-    const { cv, onChangePersonal, onChangeExperience, onChangeEducation, onAddExperience, onAddEducation, onLoadExample, onReset, onPDF } = this.props;
+    const { 
+      cv, 
+      onChangePersonal, 
+      onChangeExperience, 
+      onChangeEducation, 
+      onAddExperience, 
+      onAddEducation, 
+      onLoadExample, 
+      onReset, 
+      onPDF 
+    } = this.props;
     const { activeExp, activeEdu } = this.state;
-
-
-
-
-
-
 
 
     const experienceItems = cv.experience.map((experienceItem) => {
@@ -85,12 +135,24 @@ class Form extends Component {
       <div className="inputForm">
         <Personal personalInfo={cv.personal} onChange={onChangePersonal}/>
         <div className="experience-header">
-          <Formtitle title="Experience" className="experience-header-left" onClick={onAddExperience}/>
+          <Formtitle 
+            title="Experience" 
+            className="experience-header-left" 
+            onClickAdd={onAddExperience} 
+            onClickDelete={this.handleDeleteExperienceClass}
+            id = {activeExp}
+          />
           <Multiple data={cv.experience} onClick={this.handleActiveExperience} activeID={activeExp}/>
         </div>
         {experienceItems}
         <div className="education-header">
-          <Formtitle title="Education" className="education-header-left" onClick={onAddEducation}/>
+          <Formtitle 
+            title="Education" 
+            className="education-header-left" 
+            onClickAdd={onAddEducation}
+            onClickDelete={this.handleDeleteEducationClass}
+            id = {activeEdu}
+          />
           <Multiple data={cv.education} onClick={this.handleActiveEducation} activeID={activeEdu}/>
         </div>
         {educationItems}
