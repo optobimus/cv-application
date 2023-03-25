@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class EducationItem extends Component {
-    render() {
-        const { educationItem } = this.props;
+function EducationItem(props) {
+    const { educationItem } = props;
 
       return (
         <div className="education-preview">
@@ -16,7 +15,6 @@ class EducationItem extends Component {
             </div>
         </div>  
       );
-    }
 }
   
   

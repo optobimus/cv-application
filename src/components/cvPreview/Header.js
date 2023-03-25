@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Header extends Component {
-    render() {
-      const { firstName, lastName, title } = this.props;
+function Header(props) {
+      const { firstName, lastName, title } = props;
       return (
         <div className="preview-header">
           <h1>
@@ -11,7 +10,6 @@ class Header extends Component {
           <p>{title}</p>
         </div>  
       );
-    }
 }
   
   

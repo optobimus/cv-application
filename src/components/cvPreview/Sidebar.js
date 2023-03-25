@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Sidebar extends Component {
-    render() {
-      const { photo, address, phoneNumber, email } = this.props;
+function Sidebar(props) {
+      const { photo, address, phoneNumber, email } = props;
       return (
         <div className="sidebar">
           <img className="avatar" src={photo} alt="avatar"/>
@@ -15,7 +14,6 @@ class Sidebar extends Component {
           <p>{email}</p>
         </div>  
       );
-    }
 }
   
   

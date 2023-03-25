@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
 import ExperienceItem from "./ExperienceItem";
 import EducationItem from "./EducationItem";
 
-class Content extends Component {
-    render() {
-        const { personal, experience, education } = this.props;
+function Content(props) {
+        const { personal, experience, education } = props;
 
         const experienceItems = experience.map((experienceItem) => (
           <ExperienceItem experienceItem={experienceItem} key={experienceItem.id}/>
@@ -26,7 +25,6 @@ class Content extends Component {
             {educationItems}
         </div>  
       );
-    }
 }
   
   

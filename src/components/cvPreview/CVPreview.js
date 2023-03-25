@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../styles/preview.css"
 
 import Header from "./Header";
 import Content from "./Content";
 import Sidebar from "./Sidebar";
 
-class CVPreview extends Component {
-    render() {
-      const { cv } = this.props;
+function CVPreview(props) {
+      const { cv } = props;
       return (
         <div className="cv-preview">
           <Header firstName={cv.personal.firstName} lastName={cv.personal.lastName} title={cv.personal.title}/>
@@ -17,7 +16,6 @@ class CVPreview extends Component {
           </div>
           </div>  
       );
-    }
 }
   
   

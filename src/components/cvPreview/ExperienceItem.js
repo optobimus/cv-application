@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ExperienceItem extends Component {
-    render() {
-        const { experienceItem } = this.props;
+function ExperienceItem(props) {
+    const { experienceItem } = props;
 
       return (
         <div className="experience-preview">
@@ -15,7 +14,6 @@ class ExperienceItem extends Component {
             </div>
         </div>  
       );
-    }
 }
   
   
