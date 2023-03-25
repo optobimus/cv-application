@@ -1,31 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Formtitle extends Component {
-    constructor(props) {
-        super(props);
-        this.handleAddButton = this.handleAddButton.bind(this);
-        this.handleDeleteButton = this.handleDeleteButton.bind(this);
-    }
-    
-    handleAddButton(e) {
-      this.props.onClickAdd();
-    }
+function Formtitle({ id, className, title, onClickAdd, onClickDelete })  {
 
-    handleDeleteButton(e) {
-      const { id } = this.props;
-      this.props.onClickDelete(id);
-    }
+  const handleAddButton = (e) => {
+    onClickAdd();
+  }
 
-    render() {
-        const { className, title } = this.props;
-      return (
-        <div className={className}>
-          <h3>{title}</h3>
-          <button onClick={this.handleAddButton}>Add</button>
-          <button onClick={this.handleDeleteButton}>Delete</button>
-        </div>
-      );
-    }
+  const handleDeleteButton = (e) => {
+    onClickDelete(id);
+  }
+
+  return (
+    <div className={className}>
+      <h3>{title}</h3>
+      <button onClick={handleAddButton}>Add</button>
+      <button onClick={handleDeleteButton}>Delete</button>
+    </div>
+  );
 }
   
   

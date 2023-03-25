@@ -1,41 +1,44 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-class Multiple extends Component {
+const Multiple = ({ data, activeID, onClick }) => {
 
-    constructor(props) {
-      super(props);
-      this.handleClick = this.handleClick.bind(this);
-    }
+  function handleClick(e) {
+    onClick(e.target);
+  }
 
-    handleClick(e) {
-      this.props.onClick(e.target);
-    }
+  const [activeButtonID, setActiveButtonID] = useState("");
 
-    componentDidMount() {
-      const activeButton = document.querySelector(".nav-button.active");
-      const activeID = activeButton?.dataset.id;
-      this.setState({ activeID });
-    }
+  useEffect(() => {
+    const activeButton = document.querySelector(".nav-button.active");
+    const activeID = activeButton?.dataset.id;
+    setActiveButtonID(activeID);
+  }, []);
 
+  let i = 1;
+  
+  const items = data.map((item) => {
+    const isActive = item.id === activeButtonID;
+    const buttonClass = `nav-button${isActive ? " active" : ""}`;
+    const button = (
+      <button 
+        key={item.id} 
+        className={buttonClass} 
+        type="button" 
+        data-id={item.id} 
+        onClick={handleClick}
+      >
+        {i}
+      </button>
+    );
+    i=i+1;
+    return button;
+  });
 
-    render() {
-      const { data, activeID } = this.props;
-      let i = 1;
-     
-      const items = data.map((item) => {
-        const isActive = item.id === activeID;
-        const buttonClass = `nav-button${isActive ? " active" : ""}`;
-        const button = <button key={item.id} className={buttonClass} type="button" data-id={item.id} onClick={this.handleClick}>{i}</button>
-        i=i+1;
-        return button;
-      });
-
-      return (
-        <div className="page-navigation">
-          {items}
-        </div>
-      );
-    }
+  return (
+    <div className="page-navigation">
+      {items}
+    </div>
+  );
 }
   
   
