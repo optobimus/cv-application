@@ -1,8 +1,8 @@
 import uniqid from "uniqid"
-import examplePhoto from '../../static/profile.webp';
+import examplePhoto from '../../static/example.jpg';
 
 const exampleCV = {
-    personalInfo: {
+    personal: {
         firstName: 'John',
         lastName: 'Doe',
         title: 'Senior Web Developer',
@@ -11,7 +11,7 @@ const exampleCV = {
         phoneNumber: '123456789',
         email: 'john.doe@gmail.com',
         description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tempus imperdiet nisl sed vestibulum. Donec gravida, nulla eget blandit fermentum, mauris nisi rutrum libero, ac pharetra erat est sit amet tellus. Quisque fermentum dolor a interdum fermentum. Maecenas vehicula ac ipsum nec gravida. Integer quis porta turpis. Aenean et metus.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tempus imperdiet nisl sed vestibulum. Donec gravida, nulla eget blandit fermentum, mauris nisi rutrum libero, ac pharetra erat est sit amet tellus.',
     },
     experience: [
         {
@@ -38,14 +38,6 @@ const exampleCV = {
         startDate: '2010',
         endDate: '2012',
         },
-        {
-        id: uniqid(),
-        position: 'Position',
-        company: 'Company name',
-        city: 'City name',
-        startDate: 'From',
-        endDate: 'To',
-        },
     ],
     education: [
         {
@@ -65,15 +57,6 @@ const exampleCV = {
         subject: 'Visual Art',
         startDate: '2005',
         endDate: '2008',
-        },
-        {
-        id: uniqid(),
-        universityName: 'University name',
-        city: 'City name',
-        degree: '',
-        subject: '',
-        startDate: 'From',
-        endDate: 'To',
         },
     ],
 }

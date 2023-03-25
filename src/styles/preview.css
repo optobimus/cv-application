@@ -10,6 +10,7 @@
     flex-direction: column;
     height: calc(100% - 40px);
     width: 556.27px;
+    font-size: 0.9em;
 }
 
 .main-preview {
@@ -39,17 +40,25 @@
     overflow-wrap: break-word; /* allow words to break between letters */
 }
 
+.content h3 {
+    margin: 10px 0;
+}
+
 .sidebar {
     background-color: #EEEEEE;
     flex-basis: 27%;
+    max-width: 27%;
+    word-wrap: break-word;
 }
 
 .experience-preview {
     display: flex;
-    gap: 30px;
+    gap: 15px;
+    line-height: 0.6;
 }
 
 .education-preview {
     display: flex;
     gap: 30px;
+    line-height: 0.6;
 }
