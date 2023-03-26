@@ -11,6 +11,7 @@
     height: calc(100% - 40px);
     width: 556.27px;
     font-size: 0.9em;
+    overflow: hidden;
 }
 
 .main-preview {
@@ -26,7 +27,6 @@
     background-color: #457B9D;
     height: 50px;
     color: white;
-    border-radius: 5px 5px 0 0;
 }
 
 .preview-header h1, .preview-header p {
