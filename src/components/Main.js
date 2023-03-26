@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import uniqid from "uniqid"
 
 import "../styles/main.css"
@@ -10,119 +10,96 @@ import Form from "./form/Form";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-class Main extends Component {
-  constructor() {
-    super();
+function Main(props) {
 
-    this.state = {
-      cv: emptyCV
-    }
+  const [cv, setCV] = useState(emptyCV);
 
-    this.handleChangePersonal = this.handleChangePersonal.bind(this);
-    this.handleChangeExperience = this.handleChangeExperience.bind(this);
-    this.handleChangeEducation = this.handleChangeEducation.bind(this);
-    this.handleAddExperience = this.handleAddExperience.bind(this);
-    this.handleAddEducation = this.handleAddEducation.bind(this);
-    this.handleDeleteExperience = this.handleDeleteExperience.bind(this);
-    this.handleDeleteEducation = this.handleDeleteEducation.bind(this);
-    this.handleLoadExample = this.handleLoadExample.bind(this);
-    this.handlePDF = this.handlePDF.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-  }
-
-  handleChangePersonal(e) {
+  const handleChangePersonal = (e) => {
     const { name, value, type } = e.target;
     
     if (type === 'file') {
-      this.handleChangeFile(e);
+      handleChangeFile(e);
       return;
     }
 
-    this.setState((prevState) => ({
-      cv: {
-        ...prevState.cv,
-        personal: {
-          ...prevState.cv.personal,
-          [name]: value,
-        },
-      },
+    setCV(prevCV => ({
+      ...prevCV,
+      personal: {
+        ...prevCV.personal,
+        [name]: value,
+      }
     }));
   }
 
-  handleChangeFile(e) {
+  const handleChangeFile = (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = () => {
-      this.setState((prevState) => ({
-        cv: {
-          ...prevState.cv,
-          personal: {
-            ...prevState.cv.personal,
-            [name]: reader.result,
-          },
+      setCV(prevCV => ({
+        ...prevCV,
+        personal: {
+          ...prevCV.personal,
+          [name]: reader.result,
         },
       }));
     };
     reader.readAsDataURL(file);
   }
 
-  handleChangeExperience(e, id) {
+  const handleChangeExperience = (e, id) => {
     const { name, value } = e.target;
-    this.setState((prevState) => {
-      const newExperience = prevState.cv.experience.map((experienceItem) => {
+    setCV(prevCV => {
+      const newExperience = prevCV.experience.map((experienceItem) => {
         if (experienceItem.id === id) {
           return { ...experienceItem, [name]: value };
         }
         return experienceItem;
       });
-      return { cv: { ...prevState.cv, experience: [...newExperience] } };
+      return { ...prevCV, experience: [...newExperience] };
     });
   }
 
-  handleChangeEducation(e, id) {
+  const handleChangeEducation = (e, id) => {
     const { name, value } = e.target;
-    this.setState((prevState) => {
-      const newEducation = prevState.cv.education.map((educationItem) => {
+    setCV(prevCV => {
+      const newEducation = prevCV.education.map((educationItem) => {
         if (educationItem.id === id) {
           return { ...educationItem, [name]: value };
         }
         return educationItem;
       });
-      return { cv: { ...prevState.cv, education: [...newEducation] } };
+      return { ...prevCV, education: [...newEducation] };
     });
   }
 
-  handleAddExperience() {
-    if (this.state.cv.experience.length < 5) {
-      this.setState((prevState) => ({
-        cv: {
-          ...prevState.cv,
-          experience: [
-            ...prevState.cv.experience,
-            {
-              id: uniqid(),
-              position: '',
-              company: '',
-              city: '',
-              startDate: '',
-              endDate: '',
-            },
-          ],
-        },
+  const handleAddExperience = () => {
+    if (cv.experience.length < 5) {
+      setCV((prevCV) => ({
+        ...prevCV,
+        experience: [
+          ...prevCV.experience,
+          {
+            id: uniqid(),
+            position: '',
+            company: '',
+            city: '',
+            startDate: '',
+            endDate: '',
+          },
+        ],
       }));
     }
   }
 
-  handleAddEducation() {
-    if (this.state.cv.education.length < 5) {
-      this.setState((prevState) => ({
-        cv: {
-          ...prevState.cv,
+  const handleAddEducation = () => {
+    if (cv.education.length < 5) {
+      setCV((prevCV) => ({
+          ...prevCV,
           education: [
-            ...prevState.cv.education,
+            ...prevCV.education,
             {
               id: uniqid(),
               university: '',
@@ -133,42 +110,37 @@ class Main extends Component {
               endDate: '',
             },
           ],
-        },
       }));
     }
   }
 
-  handleDeleteExperience(id) {
-    this.setState((prevState) => {
-      const newExperience = prevState.cv.experience.filter((experienceItem) => {
+  const handleDeleteExperience = (id) => {
+    setCV((prevCV) => {
+      const newExperience = prevCV.experience.filter((experienceItem) => {
         return experienceItem.id !== id;
       });
-      return { cv: { ...prevState.cv, experience: newExperience } };
+      return { ...prevCV, experience: newExperience };
     });
   }
 
-  handleDeleteEducation(id) {
-    this.setState((prevState) => {
-      const newEducation = prevState.cv.education.filter((educationItem) => {
+  const handleDeleteEducation = (id) => {
+    setCV((prevCV) => {
+      const newEducation = prevCV.education.filter((educationItem) => {
         return educationItem.id !== id;
       });
-      return { cv: { ...prevState.cv, education: newEducation } };
+      return { ...prevCV, education: newEducation };
     });
   }
 
-  handleLoadExample() {
-    this.setState(() => ({
-      cv: exampleCV
-    }));
+  const handleLoadExample = () => {
+    setCV(exampleCV);
   }
 
-  handleReset() {
-    this.setState(() => ({
-      cv: emptyCV,
-    }));
+  const handleReset = () => {
+    setCV(emptyCV);
   }
 
-  handlePDF() {
+  const handlePDF = () => {
     const cvPreview = document.querySelector('.cv-preview');
     if (!cvPreview) return;
 
@@ -212,35 +184,28 @@ class Main extends Component {
       cvPreview.setAttribute('style', originalStyle);
     });
   }
-  
-  
-  
 
-  render() {
-    const { cv } = this.state;
-    return (
-      <div className="main">
-        <Form 
-          cv={cv}
-          onChangePersonal={this.handleChangePersonal}
-          onChangeExperience={this.handleChangeExperience}
-          onChangeEducation={this.handleChangeEducation}
-          onAddExperience={this.handleAddExperience}
-          onAddEducation={this.handleAddEducation}
-          onDeleteExperience={this.handleDeleteExperience}
-          onDeleteEducation={this.handleDeleteEducation}
-          onLoadExample={this.handleLoadExample}
-          onPDF={this.handlePDF}
-          onReset={this.handleReset}
-        
-        />
-        <CVPreview cv={cv}/>
-      </div>  
-    );
-  }
+  return (
+    <div className="main">
+      <Form 
+        cv={cv}
+        onChangePersonal={handleChangePersonal}
+        onChangeExperience={handleChangeExperience}
+        onChangeEducation={handleChangeEducation}
+        onAddExperience={handleAddExperience}
+        onAddEducation={handleAddEducation}
+        onDeleteExperience={handleDeleteExperience}
+        onDeleteEducation={handleDeleteEducation}
+        onLoadExample={handleLoadExample}
+        onPDF={handlePDF}
+        onReset={handleReset}
+      />
+      <CVPreview cv={cv}/>
+    </div>  
+  );
 }
   
   
 export default Main;
   
-// 231
+// 231 to 209
